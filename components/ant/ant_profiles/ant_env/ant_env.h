@@ -184,9 +184,9 @@ struct ant_env_profile_s
  *
  * @retval     NRF_SUCCESS      If initialization was successful. Otherwise, an error code is returned.
  */
-// ret_code_t ant_env_sens_init(ant_env_profile_t           * p_profile,
-//                              ant_channel_config_t const  * p_channel_config,
-//                              ant_env_sens_config_t const * p_sens_config);
+ ret_code_t ant_env_sens_init(ant_env_profile_t           * p_profile,
+                              ant_channel_config_t const  * p_channel_config,
+                              ant_env_sens_config_t const * p_sens_config);
 
 /**@brief Function for opening the profile instance channel for ANT ENV Display.
  *
