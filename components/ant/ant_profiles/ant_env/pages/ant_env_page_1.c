@@ -61,6 +61,7 @@ void ant_env_page_1_encode(uint8_t                    * p_page_buffer,
     ant_env_page1_data_layout_t * p_outcoming_data = (ant_env_page1_data_layout_t *)p_page_buffer;
 
     p_outcoming_data->reserved                          = UINT8_MAX;
+    p_outcoming_data->event_count                       = (uint8_t)(p_page_data->event_count);
     p_outcoming_data->_24_hour_low_lsb                  = (uint8_t)(p_page_data->_24_hour_low & 0xFFu);
     p_outcoming_data->_24_hour_low_msn                  = (uint8_t)((p_page_data->_24_hour_low >> 4u) & 0xFu);          
     p_outcoming_data->_24_hour_high_lsn                 = (uint8_t)(p_page_data->_24_hour_high & 0xFu);
