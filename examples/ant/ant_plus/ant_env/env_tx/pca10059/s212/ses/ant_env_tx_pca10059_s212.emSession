@@ -1,0 +1,56 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
+ </FrameBufferWindow>
+ <Memory1/>
+ <Memory2/>
+ <Memory3/>
+ <Memory4/>
+ <Project>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212;Application"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212;Board Definition"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212;nRF_ANT"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212;nRF_Log"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212;nRF_Segger_RTT"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212;nRF_SoftDevice"/>
+  <ProjectSessionItem path="ant_env_tx_pca10059_s212;ant_env_tx_pca10059_s212;Segger Startup Files"/>
+ </Project>
+ <Register1/>
+ <Register2/>
+ <Register3/>
+ <Register4/>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never"/>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="90" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="71" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="81" useTextEdit="1" openedFrom="C:/Users/Stavros Avramidis/Desktop/nRF5_SDK_17.0.0_9d13099/examples/ant/ant_plus/ant_env/env_tx/main.c" useBinaryEdit="0" left="0" path="../../../../../../../../components/ant/ant_profiles/ant_env/ant_env.c" selected="0" top="58" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="26" useTextEdit="1" openedFrom="C:/Users/Stavros Avramidis/Desktop/nRF5_SDK_17.0.0_9d13099/examples/ant/ant_plus/ant_env/env_tx/main.c" useBinaryEdit="0" left="0" path="../../../../../../../../components/ant/ant_profiles/ant_env/pages/ant_env_page_1.h" selected="0" top="12" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="3" useTextEdit="1" openedFrom="C:/Users/Stavros Avramidis/Desktop/nRF5_SDK_17.0.0_9d13099/examples/ant/ant_plus/ant_env/env_tx/main.c" useBinaryEdit="0" left="0" path="../../../../../../../../modules/nrfx/mdk/nrf51_to_nrf52840.h" selected="0" top="135" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="189" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../../../components/ant/ant_profiles/ant_env/ant_env.h" selected="0" top="156" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="62" useTextEdit="1" openedFrom="C:/Users/Stavros Avramidis/Desktop/nRF5_SDK_17.0.0_9d13099/examples/ant/ant_plus/ant_env/env_tx/main.c" useBinaryEdit="0" left="0" path="../../../../../../../../components/boards/boards.c" selected="0" top="42" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="60" useTextEdit="1" openedFrom="C:/Users/Stavros Avramidis/Desktop/nRF5_SDK_17.0.0_9d13099/examples/ant/ant_plus/ant_env/env_tx/main.c" useBinaryEdit="0" left="0" path="../../../../../../../../components/boards/pca10059.h" selected="0" top="45" codecName="Default"/>
+ </Files>
+ <ARMCrossStudioWindow activeProject="ant_env_tx_pca10059_s212" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/Stavros Avramidis/Desktop/nRF5_SDK_17.0.0_9d13099/components/ant/ant_profiles/ant_env" debugSearchPath="" autoConnectCapabilities="3199"/>
+</session>
