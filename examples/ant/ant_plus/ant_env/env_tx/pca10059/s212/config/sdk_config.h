@@ -64,9 +64,9 @@
 #define CHAN_ID_TRANS_TYPE 1
 #endif
 
-// <o> HRM_CHANNEL_NUM - Channel number assigned to HRM profile. 
-#ifndef HRM_CHANNEL_NUM
-#define HRM_CHANNEL_NUM 0
+// <o> ENV_CHANNEL_NUM - Channel number assigned to HRM profile. 
+#ifndef ENV_CHANNEL_NUM
+#define ENV_CHANNEL_NUM 0
 #endif
 
 // <o> MODIFICATION_TYPE  - Type of Heart Rate values update
@@ -83,29 +83,29 @@
 // <h> PRODUCT_INFORMATION 
 
 //==========================================================
-// <o> HRM_HW_VERSION - Hardware revision 
-#ifndef HRM_HW_VERSION
-#define HRM_HW_VERSION 5
+// <o> ENV_HW_VERSION - Hardware revision 
+#ifndef ENV_HW_VERSION
+#define ENV_HW_VERSION 5
 #endif
 
-// <o> HRM_MFG_ID - Manufacturer ID 
-#ifndef HRM_MFG_ID
-#define HRM_MFG_ID 2
+// <o> ENV_MFG_ID - Manufacturer ID 
+#ifndef ENV_MFG_ID
+#define ENV_MFG_ID 2
 #endif
 
-// <o> HRM_MODEL_NUMBER - Model number 
-#ifndef HRM_MODEL_NUMBER
-#define HRM_MODEL_NUMBER 2
+// <o> ENV_MODEL_NUMBER - Model number 
+#ifndef ENV_MODEL_NUMBER
+#define ENV_MODEL_NUMBER 2
 #endif
 
-// <o> HRM_SW_VERSION - Software version number 
-#ifndef HRM_SW_VERSION
-#define HRM_SW_VERSION 0
+// <o> ENV_SW_VERSION - Software version number 
+#ifndef ENV_SW_VERSION
+#define ENV_SW_VERSION 0
 #endif
 
-// <o> HRM_SERIAL_NUMBER - Serial number 
-#ifndef HRM_SERIAL_NUMBER
-#define HRM_SERIAL_NUMBER 43981
+// <o> ENV_SERIAL_NUMBER - Serial number 
+#ifndef ENV_SERIAL_NUMBER
+#define ENV_SERIAL_NUMBER 43981
 #endif
 
 // </h> 
@@ -145,17 +145,17 @@
 #define ANT_CHANNEL_CONFIG_ENABLED 1
 #endif
 
-// <e> ANT_HRM_ENABLED - ant_hrm - Heart Rate Monitor Profile
+// <e> ANT_ENV_ENABLED - ant_env - Enviroment Profile
 //==========================================================
-#ifndef ANT_HRM_ENABLED
-#define ANT_HRM_ENABLED 1
+#ifndef ANT_ENV_ENABLED
+#define ANT_ENV_ENABLED 1
 #endif
-// <e> ANT_HRM_LOG_ENABLED - Enables general logging in the module.
+// <e> ANT_ENV_LOG_ENABLED - Enables general logging in the module.
 //==========================================================
-#ifndef ANT_HRM_LOG_ENABLED
-#define ANT_HRM_LOG_ENABLED 1
+#ifndef ANT_ENV_LOG_ENABLED
+#define ANT_ENV_LOG_ENABLED 1
 #endif
-// <o> ANT_HRM_LOG_LEVEL  - Default Severity level
+// <o> ANT_ENV_LOG_LEVEL  - Default Severity level
  
 // <0=> Off 
 // <1=> Error 
@@ -163,11 +163,11 @@
 // <3=> Info 
 // <4=> Debug 
 
-#ifndef ANT_HRM_LOG_LEVEL
-#define ANT_HRM_LOG_LEVEL 3
+#ifndef ANT_ENV_LOG_LEVEL
+#define ANT_ENV_LOG_LEVEL 3
 #endif
 
-// <o> ANT_HRM_INFO_COLOR  - ANSI escape code prefix.
+// <o> ANT_ENV_INFO_COLOR  - ANSI escape code prefix.
  
 // <0=> Default 
 // <1=> Black 
@@ -179,18 +179,18 @@
 // <7=> Cyan 
 // <8=> White 
 
-#ifndef ANT_HRM_INFO_COLOR
-#define ANT_HRM_INFO_COLOR 0
+#ifndef ANT_ENV_INFO_COLOR
+#define ANT_ENV_INFO_COLOR 0
 #endif
 
 // </e>
 
-// <e> ANT_HRM_PAGE_0_LOG_ENABLED - Enables logging of HRM page 0 in the module.
+// <e> ANT_ENV_PAGE_0_LOG_ENABLED - Enables logging of HRM page 0 in the module.
 //==========================================================
-#ifndef ANT_HRM_PAGE_0_LOG_ENABLED
-#define ANT_HRM_PAGE_0_LOG_ENABLED 1
+#ifndef ANT_ENV_PAGE_0_LOG_ENABLED
+#define ANT_ENV_PAGE_0_LOG_ENABLED 1
 #endif
-// <o> ANT_HRM_PAGE_0_LOG_LEVEL  - Default Severity level
+// <o> ANT_ENV_PAGE_0_LOG_LEVEL  - Default Severity level
  
 // <0=> Off 
 // <1=> Error 
@@ -198,11 +198,11 @@
 // <3=> Info 
 // <4=> Debug 
 
-#ifndef ANT_HRM_PAGE_0_LOG_LEVEL
-#define ANT_HRM_PAGE_0_LOG_LEVEL 3
+#ifndef ANT_ENV_PAGE_0_LOG_LEVEL
+#define ANT_ENV_PAGE_0_LOG_LEVEL 3
 #endif
 
-// <o> ANT_HRM_PAGE_0_INFO_COLOR  - ANSI escape code prefix.
+// <o> ANT_ENV_PAGE_0_INFO_COLOR  - ANSI escape code prefix.
  
 // <0=> Default 
 // <1=> Black 
@@ -214,18 +214,18 @@
 // <7=> Cyan 
 // <8=> White 
 
-#ifndef ANT_HRM_PAGE_0_INFO_COLOR
-#define ANT_HRM_PAGE_0_INFO_COLOR 0
+#ifndef ANT_ENV_PAGE_0_INFO_COLOR
+#define ANT_ENV_PAGE_0_INFO_COLOR 0
 #endif
 
 // </e>
 
-// <e> ANT_HRM_PAGE_1_LOG_ENABLED - Enables logging of HRM page 1 in the module.
+// <e> ANT_ENV_PAGE_1_LOG_ENABLED - Enables logging of HRM page 1 in the module.
 //==========================================================
-#ifndef ANT_HRM_PAGE_1_LOG_ENABLED
-#define ANT_HRM_PAGE_1_LOG_ENABLED 1
+#ifndef ANT_ENV_PAGE_1_LOG_ENABLED
+#define ANT_ENV_PAGE_1_LOG_ENABLED 1
 #endif
-// <o> ANT_HRM_PAGE_1_LOG_LEVEL  - Default Severity level
+// <o> ANT_ENV_PAGE_1_LOG_LEVEL  - Default Severity level
  
 // <0=> Off 
 // <1=> Error 
@@ -233,11 +233,11 @@
 // <3=> Info 
 // <4=> Debug 
 
-#ifndef ANT_HRM_PAGE_1_LOG_LEVEL
-#define ANT_HRM_PAGE_1_LOG_LEVEL 3
+#ifndef ANT_ENV_PAGE_1_LOG_LEVEL
+#define ANT_ENV_PAGE_1_LOG_LEVEL 3
 #endif
 
-// <o> ANT_HRM_PAGE_1_INFO_COLOR  - ANSI escape code prefix.
+// <o> ANT_ENV_PAGE_1_INFO_COLOR  - ANSI escape code prefix.
  
 // <0=> Default 
 // <1=> Black 
@@ -249,18 +249,18 @@
 // <7=> Cyan 
 // <8=> White 
 
-#ifndef ANT_HRM_PAGE_1_INFO_COLOR
-#define ANT_HRM_PAGE_1_INFO_COLOR 0
+#ifndef ANT_ENV_PAGE_1_INFO_COLOR
+#define ANT_ENV_PAGE_1_INFO_COLOR 0
 #endif
 
 // </e>
 
-// <e> ANT_HRM_PAGE_2_LOG_ENABLED - Enables logging of HRM page 2 in the module.
+// <e> ANT_ENV_PAGE_2_LOG_ENABLED - Enables logging of HRM page 2 in the module.
 //==========================================================
-#ifndef ANT_HRM_PAGE_2_LOG_ENABLED
-#define ANT_HRM_PAGE_2_LOG_ENABLED 1
+#ifndef ANT_ENV_PAGE_2_LOG_ENABLED
+#define ANT_ENV_PAGE_2_LOG_ENABLED 1
 #endif
-// <o> ANT_HRM_PAGE_2_LOG_LEVEL  - Default Severity level
+// <o> ANT_ENV_PAGE_2_LOG_LEVEL  - Default Severity level
  
 // <0=> Off 
 // <1=> Error 
@@ -268,11 +268,11 @@
 // <3=> Info 
 // <4=> Debug 
 
-#ifndef ANT_HRM_PAGE_2_LOG_LEVEL
-#define ANT_HRM_PAGE_2_LOG_LEVEL 3
+#ifndef ANT_ENV_PAGE_2_LOG_LEVEL
+#define ANT_ENV_PAGE_2_LOG_LEVEL 3
 #endif
 
-// <o> ANT_HRM_PAGE_2_INFO_COLOR  - ANSI escape code prefix.
+// <o> ANT_ENV_PAGE_2_INFO_COLOR  - ANSI escape code prefix.
  
 // <0=> Default 
 // <1=> Black 
@@ -284,18 +284,18 @@
 // <7=> Cyan 
 // <8=> White 
 
-#ifndef ANT_HRM_PAGE_2_INFO_COLOR
-#define ANT_HRM_PAGE_2_INFO_COLOR 0
+#ifndef ANT_ENV_PAGE_2_INFO_COLOR
+#define ANT_ENV_PAGE_2_INFO_COLOR 0
 #endif
 
 // </e>
 
-// <e> ANT_HRM_PAGE_3_LOG_ENABLED - Enables logging of HRM page 3 in the module.
+// <e> ANT_ENV_PAGE_3_LOG_ENABLED - Enables logging of HRM page 3 in the module.
 //==========================================================
-#ifndef ANT_HRM_PAGE_3_LOG_ENABLED
-#define ANT_HRM_PAGE_3_LOG_ENABLED 1
+#ifndef ANT_ENV_PAGE_3_LOG_ENABLED
+#define ANT_ENV_PAGE_3_LOG_ENABLED 1
 #endif
-// <o> ANT_HRM_PAGE_3_LOG_LEVEL  - Default Severity level
+// <o> ANT_ENV_PAGE_3_LOG_LEVEL  - Default Severity level
  
 // <0=> Off 
 // <1=> Error 
@@ -303,11 +303,11 @@
 // <3=> Info 
 // <4=> Debug 
 
-#ifndef ANT_HRM_PAGE_3_LOG_LEVEL
-#define ANT_HRM_PAGE_3_LOG_LEVEL 3
+#ifndef ANT_ENV_PAGE_3_LOG_LEVEL
+#define ANT_ENV_PAGE_3_LOG_LEVEL 3
 #endif
 
-// <o> ANT_HRM_PAGE_3_INFO_COLOR  - ANSI escape code prefix.
+// <o> ANT_ENV_PAGE_3_INFO_COLOR  - ANSI escape code prefix.
  
 // <0=> Default 
 // <1=> Black 
@@ -319,18 +319,18 @@
 // <7=> Cyan 
 // <8=> White 
 
-#ifndef ANT_HRM_PAGE_3_INFO_COLOR
-#define ANT_HRM_PAGE_3_INFO_COLOR 0
+#ifndef ANT_ENV_PAGE_3_INFO_COLOR
+#define ANT_ENV_PAGE_3_INFO_COLOR 0
 #endif
 
 // </e>
 
-// <e> ANT_HRM_PAGE_4_LOG_ENABLED - Enables logging of HRM page 4 in the module.
+// <e> ANT_ENV_PAGE_4_LOG_ENABLED - Enables logging of HRM page 4 in the module.
 //==========================================================
-#ifndef ANT_HRM_PAGE_4_LOG_ENABLED
-#define ANT_HRM_PAGE_4_LOG_ENABLED 1
+#ifndef ANT_ENV_PAGE_4_LOG_ENABLED
+#define ANT_ENV_PAGE_4_LOG_ENABLED 1
 #endif
-// <o> ANT_HRM_PAGE_4_LOG_LEVEL  - Default Severity level
+// <o> ANT_ENV_PAGE_4_LOG_LEVEL  - Default Severity level
  
 // <0=> Off 
 // <1=> Error 
@@ -338,11 +338,11 @@
 // <3=> Info 
 // <4=> Debug 
 
-#ifndef ANT_HRM_PAGE_4_LOG_LEVEL
-#define ANT_HRM_PAGE_4_LOG_LEVEL 3
+#ifndef ANT_ENV_PAGE_4_LOG_LEVEL
+#define ANT_ENV_PAGE_4_LOG_LEVEL 3
 #endif
 
-// <o> ANT_HRM_PAGE_4_INFO_COLOR  - ANSI escape code prefix.
+// <o> ANT_ENV_PAGE_4_INFO_COLOR  - ANSI escape code prefix.
  
 // <0=> Default 
 // <1=> Black 
@@ -354,8 +354,132 @@
 // <7=> Cyan 
 // <8=> White 
 
-#ifndef ANT_HRM_PAGE_4_INFO_COLOR
-#define ANT_HRM_PAGE_4_INFO_COLOR 0
+#ifndef ANT_ENV_PAGE_4_INFO_COLOR
+#define ANT_ENV_PAGE_4_INFO_COLOR 0
+#endif
+
+// </e>
+
+// <e> ANT_COMMON_PAGE_70_ENABLED - ant_common_page_70 - ANT+ common page 70
+//==========================================================
+#ifndef ANT_COMMON_PAGE_70_ENABLED
+#define ANT_COMMON_PAGE_70_ENABLED 1
+#endif
+// <e> ANT_COMMON_PAGE_70_LOG_ENABLED - Enables logging of common page 70 in the module.
+//==========================================================
+#ifndef ANT_COMMON_PAGE_70_LOG_ENABLED
+#define ANT_COMMON_PAGE_70_LOG_ENABLED 1
+#endif
+// <o> ANT_COMMON_PAGE_70_LOG_LEVEL  - Default Severity level
+ 
+// <0=> Off 
+// <1=> Error 
+// <2=> Warning 
+// <3=> Info 
+// <4=> Debug 
+
+#ifndef ANT_COMMON_PAGE_70_LOG_LEVEL
+#define ANT_COMMON_PAGE_70_LOG_LEVEL 3
+#endif
+
+// <o> ANT_COMMON_PAGE_70_INFO_COLOR  - ANSI escape code prefix.
+ 
+// <0=> Default 
+// <1=> Black 
+// <2=> Red 
+// <3=> Green 
+// <4=> Yellow 
+// <5=> Blue 
+// <6=> Magenta 
+// <7=> Cyan 
+// <8=> White 
+
+#ifndef ANT_COMMON_PAGE_70_INFO_COLOR
+#define ANT_COMMON_PAGE_70_INFO_COLOR 0
+#endif
+
+// </e>
+
+// </e>
+
+// <e> ANT_COMMON_PAGE_80_ENABLED - ant_common_page_80 - ANT+ common page 80
+//==========================================================
+#ifndef ANT_COMMON_PAGE_80_ENABLED
+#define ANT_COMMON_PAGE_80_ENABLED 1
+#endif
+// <e> ANT_COMMON_PAGE_80_LOG_ENABLED - Enables logging of common page 80 in the module.
+//==========================================================
+#ifndef ANT_COMMON_PAGE_80_LOG_ENABLED
+#define ANT_COMMON_PAGE_80_LOG_ENABLED 1
+#endif
+// <o> ANT_COMMON_PAGE_80_LOG_LEVEL  - Default Severity level
+ 
+// <0=> Off 
+// <1=> Error 
+// <2=> Warning 
+// <3=> Info 
+// <4=> Debug 
+
+#ifndef ANT_COMMON_PAGE_80_LOG_LEVEL
+#define ANT_COMMON_PAGE_80_LOG_LEVEL 3
+#endif
+
+// <o> ANT_COMMON_PAGE_80_INFO_COLOR  - ANSI escape code prefix.
+ 
+// <0=> Default 
+// <1=> Black 
+// <2=> Red 
+// <3=> Green 
+// <4=> Yellow 
+// <5=> Blue 
+// <6=> Magenta 
+// <7=> Cyan 
+// <8=> White 
+
+#ifndef ANT_COMMON_PAGE_80_INFO_COLOR
+#define ANT_COMMON_PAGE_80_INFO_COLOR 0
+#endif
+
+// </e>
+
+// </e>
+
+// <e> ANT_COMMON_PAGE_81_ENABLED - ant_common_page_81 - ANT+ common page 81
+//==========================================================
+#ifndef ANT_COMMON_PAGE_81_ENABLED
+#define ANT_COMMON_PAGE_81_ENABLED 1
+#endif
+// <e> ANT_COMMON_PAGE_81_LOG_ENABLED - Enables logging of common page 81 in the module.
+//==========================================================
+#ifndef ANT_COMMON_PAGE_81_LOG_ENABLED
+#define ANT_COMMON_PAGE_81_LOG_ENABLED 1
+#endif
+// <o> ANT_COMMON_PAGE_81_LOG_LEVEL  - Default Severity level
+ 
+// <0=> Off 
+// <1=> Error 
+// <2=> Warning 
+// <3=> Info 
+// <4=> Debug 
+
+#ifndef ANT_COMMON_PAGE_81_LOG_LEVEL
+#define ANT_COMMON_PAGE_81_LOG_LEVEL 3
+#endif
+
+// <o> ANT_COMMON_PAGE_81_INFO_COLOR  - ANSI escape code prefix.
+ 
+// <0=> Default 
+// <1=> Black 
+// <2=> Red 
+// <3=> Green 
+// <4=> Yellow 
+// <5=> Blue 
+// <6=> Magenta 
+// <7=> Cyan 
+// <8=> White 
+
+#ifndef ANT_COMMON_PAGE_81_INFO_COLOR
+#define ANT_COMMON_PAGE_81_INFO_COLOR 0
 #endif
 
 // </e>
@@ -368,6 +492,15 @@
 #ifndef ANT_KEY_MANAGER_ENABLED
 #define ANT_KEY_MANAGER_ENABLED 1
 #endif
+
+// <q> ANT_REQUEST_CONTROLLER_ENABLED  - ant_request_controller - ANT+ request controller
+ 
+
+#ifndef ANT_REQUEST_CONTROLLER_ENABLED
+#define ANT_REQUEST_CONTROLLER_ENABLED 1
+#endif
+
+
 
 // <e> ANT_STATE_INDICATOR_ENABLED - ant_state_indicator - ANT state indicator using BSP
 //==========================================================
@@ -4458,11 +4591,11 @@
 #define ANT_ENCRYPT_ANT_OBSERVER_PRIO 1
 #endif
 
-// <o> ANT_HRM_ANT_OBSERVER_PRIO  
+// <o> ANT_ENV_ANT_OBSERVER_PRIO  
 // <i> Priority with which ANT events are dispatched to the Heart Rate Monitor.
 
-#ifndef ANT_HRM_ANT_OBSERVER_PRIO
-#define ANT_HRM_ANT_OBSERVER_PRIO 1
+#ifndef ANT_ENV_ANT_OBSERVER_PRIO
+#define ANT_ENV_ANT_OBSERVER_PRIO 1
 #endif
 
 // <o> ANT_SDM_ANT_OBSERVER_PRIO  

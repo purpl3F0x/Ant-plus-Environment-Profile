@@ -11,7 +11,7 @@
 
 
 #include "sdk_common.h"
-// #if NRF_MODULE_ENABLED(ANT_ENV)
+#if NRF_MODULE_ENABLED(ANT_ENV)
 
 #include "ant_env_page_0.h"
 #include "ant_env_utils.h"
@@ -82,4 +82,4 @@ void ant_env_page_0_encode(uint8_t                    * p_page_buffer,
 //     page0_data_log(p_page_data);
 // }
 
-// #endif // NRF_MODULE_ENABLED(ANT_ENV)
+#endif // NRF_MODULE_ENABLED(ANT_ENV)

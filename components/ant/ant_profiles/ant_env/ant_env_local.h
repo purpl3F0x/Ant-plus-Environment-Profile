@@ -32,6 +32,8 @@ typedef struct
     ant_env_page_t main_page_number;
     ant_env_page_t ext_page_number;
     uint8_t        message_counter;
+    ant_request_controller_t req_controller;
+
 } ant_env_sens_cb_t;
 
 /**

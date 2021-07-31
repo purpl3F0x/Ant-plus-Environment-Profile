@@ -23,6 +23,7 @@
 #include "ant_parameters.h"
 #include "nrf_sdh_ant.h"
 #include "ant_channel_config.h"
+#include "ant_request_controller.h"
 #include "ant_env_pages.h"
 #include "sdk_errors.h"
 
@@ -120,6 +121,9 @@ typedef enum
 {
     ANT_ENV_PAGE_0, ///< Main data page number 0.
     ANT_ENV_PAGE_1, ///< Main data page number 1.
+    ANT_ENV_PAGE_70 = ANT_COMMON_PAGE_70,
+    ANT_ENV_PAGE_80 = ANT_COMMON_PAGE_80,
+    ANT_ENV_PAGE_81 = ANT_COMMON_PAGE_81,
 } ant_env_page_t;
 
 /**@brief ENV profile event type. */
@@ -127,6 +131,10 @@ typedef enum
 {
     ANT_ENV_PAGE_0_UPDATED = ANT_ENV_PAGE_0, ///< Data page 0 has been updated (Display) or sent (Sensor).
     ANT_ENV_PAGE_1_UPDATED = ANT_ENV_PAGE_1, ///< Data page 0 and page 1 have been updated (Display) or sent (Sensor).
+    ANT_ENV_PAGE_80_UPDATED = ANT_ENV_PAGE_80,      ///< Data page 80 has been updated (Display) or sent (Sensor).
+    ANT_ENV_PAGE_81_UPDATED = ANT_ENV_PAGE_81,      ///< Data page 81 has been updated (Display) or sent (Sensor).
+    ANT_ENV_PAGE_REQUEST_SUCCESS,                   ///< Data page request reached the destination.
+    ANT_ENV_PAGE_REQUEST_FAILED,                    ///< Data page request did not reach the destination.
 } ant_env_evt_t;
 
 // Forward declaration of the ant_env_profile_t type.
@@ -160,6 +168,8 @@ struct ant_env_profile_s
     ant_env_evt_handler_t evt_handler;    ///< Event handler to be called for handling events in the ENV profile.
     ant_env_page0_data_t  page_0;         ///< Page 0.
     ant_env_page1_data_t  page_1;         ///< Page 1.
+    ant_common_page80_data_t    page_80;        ///< Page 80.
+    ant_common_page81_data_t    page_81;        ///< Page 81.
 };
 
 

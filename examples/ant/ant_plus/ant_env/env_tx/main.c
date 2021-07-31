@@ -94,17 +94,17 @@ void bsp_evt_handler(bsp_event_t evt)
  */
 static void app_tick_handler(void * p_context)
 {
-//    uint32_t temp;
-//    sd_temp_get(&temp);
-//    temp = (temp * 25);
-//
-//    m_ant_env.page_1.current_temp = (uint16_t)temp;
-//    m_ant_env.page_1.event_count++;
+    uint32_t temp;
+    sd_temp_get(&temp);
+    temp = (temp * 25);
 
-    {
-      bsp_board_led_invert(1);
-      bsp_board_led_invert(3);
-    }
+    m_ant_env.page_1.current_temp = (uint16_t)temp;
+    m_ant_env.page_1.event_count++;
+
+    //{
+    //  bsp_board_led_invert(1);
+    //  bsp_board_led_invert(3);
+    //}
 }
 
 /**@brief Function for setup all things not directly associated with ANT stack/protocol.
@@ -190,7 +190,6 @@ void ant_env_evt_handler(ant_env_profile_t * p_profile, ant_env_evt_t event)
             break;
     }
 }
-/** @snippet [ANT ENV simulator call] */
 
 /**
  * @brief Function for ENV profile initialization.
@@ -206,12 +205,16 @@ static void profile_setup(void)
                                  ENV_SENS_CHANNEL_CONFIG(m_ant_env),
                                  ENV_SENS_PROFILE_CONFIG(m_ant_env));
     APP_ERROR_CHECK(err_code);
+    
 
-//    m_ant_env.   = ENV_MFG_ID;
-//    m_ant_env.ENV_PROFILE_serial_num = ENV_SERIAL_NUMBER;
-//    m_ant_env.ENV_PROFILE_hw_version = ENV_HW_VERSION;
-//    m_ant_env.ENV_PROFILE_sw_version = ENV_SW_VERSION;
-//    m_ant_env.ENV_PROFILE_model_num  = ENV_MODEL_NUMBER;
+    m_ant_env.page_0.supported_pages = 0b0011;
+    m_ant_env.page_80.manufacturer_id = ENV_MFG_ID;
+    m_ant_env.page_81.serial_number = ENV_SERIAL_NUMBER;
+    m_ant_env.page_80.hw_revision = ENV_HW_VERSION;
+    m_ant_env.page_81.sw_revision_major = ENV_SW_VERSION;
+    m_ant_env.page_81.sw_revision_major = 0xFF;
+    m_ant_env.page_80.model_number = ENV_MODEL_NUMBER;
+
 
     err_code = ant_env_sens_open(&m_ant_env);
     APP_ERROR_CHECK(err_code);

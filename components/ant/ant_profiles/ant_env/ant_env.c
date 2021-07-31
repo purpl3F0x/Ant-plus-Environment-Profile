@@ -11,7 +11,7 @@
 
 
 #include "sdk_config.h"
-// #if ANT_ENV_ENABLED
+#if ANT_ENV_ENABLED
 
 #include "nrf_assert.h"
 #include "app_error.h"
@@ -20,6 +20,8 @@
 #include "ant_env.h"
 #include "ant_env_utils.h"
 #include "app_error.h"
+
+
 
 #define NRF_LOG_MODULE_NAME ant_env
 #if ANT_ENV_LOG_ENABLED
@@ -111,12 +113,24 @@ ret_code_t ant_env_sens_init(ant_env_profile_t           * p_profile,
  */
 static ant_env_page_t next_page_number_get(ant_env_profile_t * p_profile)
 {   
-    static ant_env_page_t page = ANT_ENV_PAGE_0;
-    // return page++ & 1;
-
-
+    static ant_env_page_t page_number = ANT_ENV_PAGE_0;
     ant_env_sens_cb_t * p_env_cb = p_profile->_cb.p_sens_cb;
-    ant_env_page_t      page_number;
+
+
+    if (ant_request_controller_pending_get(&(p_env_cb->req_controller), (uint8_t *)&page_number))
+    {
+        // No implementation needed
+        return page_number;
+    }
+    else {
+        return page_number++ &1;
+    }
+
+    return page_number++ & 1;
+
+
+    // ant_env_sens_cb_t * p_env_cb = p_profile->_cb.p_sens_cb;
+    // ant_env_page_t      page_number;
 
     if (p_env_cb->message_counter == (BACKGROUND_DATA_INTERVAL))
     {
@@ -173,12 +187,12 @@ static void sens_message_encode(ant_env_profile_t * p_profile, uint8_t * p_messa
             ant_env_page_1_encode(p_env_message_payload->page_payload, &(p_profile->page_1));
             break;
 
-        // case ANT_SDM_PAGE_80:
-        //     ant_common_page_80_encode(p_sdm_message_payload->page_payload, &(p_profile->page_80));
-        //     break;
+        case ANT_ENV_PAGE_80:
+            ant_common_page_80_encode(p_env_message_payload->page_payload, &(p_profile->page_80));
+            break;
 
-        // case ANT_SDM_PAGE_81:
-        //     ant_common_page_81_encode(p_sdm_message_payload->page_payload, &(p_profile->page_81));
+        case ANT_ENV_PAGE_81:
+            ant_common_page_81_encode(p_env_message_payload->page_payload, &(p_profile->page_81));
             break;
 
         default:
@@ -209,14 +223,50 @@ static void ant_message_send(ant_env_profile_t * p_profile)
 
 void ant_env_sens_evt_handler(ant_evt_t * p_ant_evt, void * p_context)
 {
+    ASSERT(p_context   != NULL);
+    ASSERT(p_ant_evt != NULL);
     ant_env_profile_t * p_profile = (ant_env_profile_t *)p_context;
+
+
     if (p_ant_evt->channel == p_profile->channel_number)
     {
+        uint32_t err_code;
+        uint8_t p_message_payload[ANT_STANDARD_DATA_PAYLOAD_SIZE];
+        ant_env_sens_cb_t * p_env_cb = p_profile->_cb.p_sens_cb;
+        ant_request_controller_sens_evt_handler(&(p_env_cb->req_controller), p_ant_evt);
+
+
         switch (p_ant_evt->event)
         {
             case EVENT_TX:
-                ant_message_send(p_profile);
+            case EVENT_TRANSFER_TX_FAILED:
+            case EVENT_TRANSFER_TX_COMPLETED:
+                // ant_message_send(p_profile);
+
+
+                sens_message_encode(p_profile, p_message_payload);
+                if (ant_request_controller_ack_needed(&(p_env_cb->req_controller)))
+                {
+                    err_code = sd_ant_acknowledge_message_tx(p_profile->channel_number,
+                                                             sizeof(p_message_payload),
+                                                             p_message_payload);
+                }
+                else
+                {
+                    err_code = sd_ant_broadcast_message_tx(p_profile->channel_number,
+                                                           sizeof(p_message_payload),
+                                                           p_message_payload);
+                }
+                APP_ERROR_CHECK(err_code);
+
                 break;
+            
+            // case EVENT_RX:
+            //     if (p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_ACKNOWLEDGED_DATA_ID)
+            //     {
+            //         sens_message_decode(p_profile, p_ant_evt->message.ANT_MESSAGE_aucPayload);
+            //     }
+            //     break;
 
             default:
                 break;
@@ -311,4 +361,4 @@ ret_code_t ant_env_sens_open(ant_env_profile_t * p_profile)
 //     }
 // }
 
-// #endif // ANT_ENV_ENABLED
+#endif // ANT_ENV_ENABLED
