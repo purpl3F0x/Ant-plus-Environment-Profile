@@ -51,7 +51,7 @@ static void page1_data_log(ant_env_page1_data_t const * p_page_data)
     NRF_LOG_INFO("Event Count  :                %u", (unsigned int)p_page_data->event_count);
     NRF_LOG_INFO("24-Hour Low  :                %i", (int)p_page_data->_24_hour_low);
     NRF_LOG_INFO("24-Hour High :                %i", (int)p_page_data->_24_hour_high);
-    NRF_LOG_INFO("Current Temp :                %i", (int)p_page_data->current_temp);
+    NRF_LOG_INFO("Current Temp :                %i\n\r", (int)p_page_data->current_temp);
 }
 
 

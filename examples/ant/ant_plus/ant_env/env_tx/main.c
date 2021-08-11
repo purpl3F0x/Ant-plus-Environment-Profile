@@ -41,7 +41,7 @@
     #error Unsupported value of MODIFICATION_TYPE.
 #endif
 
-#define APP_TICK_EVENT_INTERVAL  APP_TIMER_TICKS(250) /**< 0.25(4Hz) second's tick event interval in timer tick units. */
+#define APP_TICK_EVENT_INTERVAL  APP_TIMER_TICKS(500) /**< 0.25(4Hz) second's tick event interval in timer tick units. */
 #define ENV_CHANNEL_NUMBER       0x00 /**< Channel number assigned to Enviroment profile. */
 #define ANTPLUS_NETWORK_NUMBER   0    /**< Network number. */
 
@@ -101,10 +101,7 @@ static void app_tick_handler(void * p_context)
     m_ant_env.page_1.current_temp = (uint16_t)temp;
     m_ant_env.page_1.event_count++;
 
-    //{
-    //  bsp_board_led_invert(1);
-    //  bsp_board_led_invert(3);
-    //}
+
 }
 
 /**@brief Function for setup all things not directly associated with ANT stack/protocol.
@@ -136,13 +133,13 @@ static void utils_setup(void)
     err_code = ant_state_indicator_init(m_ant_env.channel_number, ENV_SENS_CHANNEL_TYPE);
     APP_ERROR_CHECK(err_code);
 
-//    err_code = app_timer_create(&m_tick_timer,
-//                                APP_TIMER_MODE_REPEATED,
-//                                app_tick_handler);
-//    APP_ERROR_CHECK(err_code);
-//
-//    err_code = app_timer_start(m_tick_timer, APP_TICK_EVENT_INTERVAL, NULL);
-//    APP_ERROR_CHECK(err_code);
+    err_code = app_timer_create(&m_tick_timer,
+                                APP_TIMER_MODE_REPEATED,
+                                app_tick_handler);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = app_timer_start(m_tick_timer, APP_TICK_EVENT_INTERVAL, NULL);
+    APP_ERROR_CHECK(err_code);
 }
 
 
@@ -176,14 +173,14 @@ void ant_env_evt_handler(ant_env_profile_t * p_profile, ant_env_evt_t event)
         case ANT_ENV_PAGE_0_UPDATED:
             /* fall through */
         case ANT_ENV_PAGE_1_UPDATED:
-            {
-                uint32_t temp;
-                sd_temp_get(&temp);
-                temp = (temp * 25);
+            //{
+            //    uint32_t temp;
+            //    sd_temp_get(&temp);
+            //    temp = (temp * 25);
 
-                m_ant_env.page_1.current_temp = (uint16_t)temp;
-                m_ant_env.page_1.event_count++;
-            }
+            //    m_ant_env.page_1.current_temp = (uint16_t)temp;
+            //    m_ant_env.page_1.event_count++;
+            //}
             break;
 
         default:
@@ -234,6 +231,8 @@ static void log_init(void)
 
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 }
+
+
 
 /**@brief Function for application main entry, does not return.
  */

@@ -33,9 +33,9 @@
 #include "nrf_log.h"
 NRF_LOG_MODULE_REGISTER();
 
-#define BACKGROUND_DATA_INTERVAL 64 /**< The number of main data pages sent between background data page.
+#define BACKGROUND_DATA_INTERVAL 128 /**< The number of main data pages sent between background data page.
                                          Background data page is sent every 65th message. */
-#define TX_TOGGLE_DIVISOR        4  /**< The number of messages between changing state of toggle bit. */
+
 
 /**@brief ENV message data layout structure. */
 typedef struct
@@ -98,7 +98,7 @@ ret_code_t ant_env_sens_init(ant_env_profile_t           * p_profile,
 
     ant_env_sens_cb_t * p_env_cb = p_profile->_cb.p_sens_cb;
     p_env_cb->main_page_number   = p_sens_config->main_page_number;
-    p_env_cb->ext_page_number    = (p_sens_config->main_page_number == ANT_ENV_PAGE_1) ? ANT_ENV_PAGE_0 : ANT_ENV_PAGE_1;
+    p_env_cb->ext_page_number    = ANT_ENV_PAGE_80;
     p_env_cb->message_counter    = 0;
 
     return ant_env_init(p_profile, p_channel_config);
@@ -113,49 +113,22 @@ ret_code_t ant_env_sens_init(ant_env_profile_t           * p_profile,
  */
 static ant_env_page_t next_page_number_get(ant_env_profile_t * p_profile)
 {   
-    static ant_env_page_t page_number = ANT_ENV_PAGE_0;
     ant_env_sens_cb_t * p_env_cb = p_profile->_cb.p_sens_cb;
-
-
-    if (ant_request_controller_pending_get(&(p_env_cb->req_controller), (uint8_t *)&page_number))
-    {
-        // No implementation needed
-        return page_number;
-    }
-    else {
-        return page_number++ &1;
-    }
-
-    return page_number++ & 1;
-
-
-    // ant_env_sens_cb_t * p_env_cb = p_profile->_cb.p_sens_cb;
-    // ant_env_page_t      page_number;
+    ant_env_page_t      page_number;
 
     if (p_env_cb->message_counter == (BACKGROUND_DATA_INTERVAL))
     {
-        page_number = p_env_cb->ext_page_number;
-
+        page_number = p_env_cb->ext_page_number++;
         p_env_cb->message_counter = 0;
+        //p_env_cb->message_counter = p_env_cb->ext_page_number++;
 
-        p_env_cb->ext_page_number++;
-
-        if (p_env_cb->ext_page_number > ANT_ENV_PAGE_1)
-        {
-            p_env_cb->ext_page_number = ANT_ENV_PAGE_1;
-        }
+        if (p_env_cb->ext_page_number > ANT_ENV_PAGE_81) 
+          p_env_cb->ext_page_number = ANT_ENV_PAGE_80;
     }
-    else
-    {
-        page_number = p_env_cb->main_page_number;
+    else {
+      page_number = p_env_cb->message_counter & 1u;
+      p_env_cb->message_counter++;
     }
-
-    // if (p_env_cb->message_counter % TX_TOGGLE_DIVISOR == 0)
-    // {
-    //     p_env_cb->toggle_bit ^= 1;
-    // }
-
-    p_env_cb->message_counter++;
 
     return page_number;
 }
@@ -261,12 +234,12 @@ void ant_env_sens_evt_handler(ant_evt_t * p_ant_evt, void * p_context)
 
                 break;
             
-            // case EVENT_RX:
-            //     if (p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_ACKNOWLEDGED_DATA_ID)
-            //     {
-            //         sens_message_decode(p_profile, p_ant_evt->message.ANT_MESSAGE_aucPayload);
-            //     }
-            //     break;
+             //case EVENT_RX:
+             //    if (p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_ACKNOWLEDGED_DATA_ID)
+             //    {
+             //        sens_message_decode(p_profile, p_ant_evt->message.ANT_MESSAGE_aucPayload);
+             //    }
+             //    break;
 
             default:
                 break;

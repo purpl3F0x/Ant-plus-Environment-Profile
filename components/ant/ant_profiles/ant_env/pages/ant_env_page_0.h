@@ -28,8 +28,10 @@ extern "C" {
  */
 typedef struct
 {
-    uint8_t  transmission_info;          
-    uint32_t supported_pages ;         
+    uint32_t supported_pages;
+    uint8_t local_time:2;
+    uint8_t utc_time:2;
+    uint8_t default_trans_rate:2;    
 } ant_env_page0_data_t;
 
 
@@ -38,8 +40,10 @@ typedef struct
 #define DEFAULT_ANT_ENV_PAGE0()   \
     (ant_env_page0_data_t)        \
     {                             \
-        .transmission_info = 0,   \
-        .supported_pages  = 0,    \
+        .supported_pages  = 0b11, \
+        .local_time = 0,          \
+        .utc_time = 0,            \
+        .default_trans_rate = 1   \
     }
 
 /**@brief Function for encoding page 0.

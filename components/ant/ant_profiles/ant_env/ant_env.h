@@ -47,7 +47,7 @@
 //  * @param[in]  DEVICE_NUMBER        Number of the device assigned to the profile instance.
 //  * @param[in]  NETWORK_NUMBER       Number of the network assigned to the profile instance.
 //  * @param[in]  ENV_MSG_PERIOD       Channel period in 32 kHz counts. The ENV profile supports only the following periods:
-//  *                                  @ref ENV_MSG_PERIOD_4Hz, @ref ENV_MSG_PERIOD_2Hz, @ref ENV_MSG_PERIOD_1Hz.
+//  *                                  @ref ENV_MSG_PERIOD_4Hz, @ref ENV_MSG_PERIOD_05Hz .
 //  */
 // #define ENV_DISP_CHANNEL_CONFIG_DEF(NAME,                                       \
 //                                     CHANNEL_NUMBER,                             \
@@ -152,7 +152,7 @@ extern "C" {
 /**@brief ENV sensor configuration structure. */
 typedef struct
 {
-    ant_env_page_t          main_page_number; ///< Determines the main data page (@ref ANT_ENV_PAGE_0 or @ref ANT_ENV_PAGE_4).
+    ant_env_page_t          main_page_number; ///< Determines the main data page (@ref ANT_ENV_PAGE_0 or @ref ANT_ENV_PAGE_1).
     ant_env_sens_cb_t     * p_cb;             ///< Pointer to the data buffer for internal use.
     ant_env_evt_handler_t   evt_handler;      ///< Event handler to be called for handling events in the ENV profile.
 } ant_env_sens_config_t;
@@ -168,8 +168,8 @@ struct ant_env_profile_s
     ant_env_evt_handler_t evt_handler;    ///< Event handler to be called for handling events in the ENV profile.
     ant_env_page0_data_t  page_0;         ///< Page 0.
     ant_env_page1_data_t  page_1;         ///< Page 1.
-    ant_common_page80_data_t    page_80;        ///< Page 80.
-    ant_common_page81_data_t    page_81;        ///< Page 81.
+    ant_common_page80_data_t    page_80;  ///< Page 80.
+    ant_common_page81_data_t    page_81;  ///< Page 81.
 };
 
 
