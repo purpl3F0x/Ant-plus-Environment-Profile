@@ -83,7 +83,7 @@
                                     TRANSMISSION_TYPE,                          \
                                     DEVICE_NUMBER,                              \
                                     NETWORK_NUMBER)                             \
-static const ant_channel_config_t   CONCAT_2(NAME,_channel_env_sens_config) =   \
+static ant_channel_config_t   CONCAT_2(NAME,_channel_env_sens_config) =   \
     {                                                                           \
         .channel_number    = (CHANNEL_NUMBER),                                  \
         .channel_type      = ENV_SENS_CHANNEL_TYPE,                             \
@@ -124,6 +124,10 @@ typedef enum
     ANT_ENV_PAGE_70 = ANT_COMMON_PAGE_70,
     ANT_ENV_PAGE_80 = ANT_COMMON_PAGE_80,
     ANT_ENV_PAGE_81 = ANT_COMMON_PAGE_81,
+    ANT_ENV_PAGE_82 = ANT_COMMON_PAGE_82,
+    ANT_ENV_PAGE_84 = ANT_COMMON_PAGE_84,
+    ANT_ENV_PAGE_73 = ANT_COMMON_PAGE_73,
+
 } ant_env_page_t;
 
 /**@brief ENV profile event type. */
@@ -133,6 +137,12 @@ typedef enum
     ANT_ENV_PAGE_1_UPDATED = ANT_ENV_PAGE_1, ///< Data page 0 and page 1 have been updated (Display) or sent (Sensor).
     ANT_ENV_PAGE_80_UPDATED = ANT_ENV_PAGE_80,      ///< Data page 80 has been updated (Display) or sent (Sensor).
     ANT_ENV_PAGE_81_UPDATED = ANT_ENV_PAGE_81,      ///< Data page 81 has been updated (Display) or sent (Sensor).
+    ANT_ENV_PAGE_82_UPDATED = ANT_ENV_PAGE_82,      ///< Data page 82 has been updated (Display) or sent (Sensor).
+    ANT_ENV_PAGE_84_UPDATED = ANT_ENV_PAGE_84,      ///< Data page 84 has been updated (Display) or sent (Sensor).
+
+    ANT_ENV_PAGE_70_REQUESTED = ANT_ENV_PAGE_70,    ///< Data page 70 has been sent (Display) or update (Sensor)
+    ANT_ENV_PAGE_73_REQUESTED = ANT_ENV_PAGE_73,    ///< Data page 73 has been sent (Display) or requested (Sensor)
+
     ANT_ENV_PAGE_REQUEST_SUCCESS,                   ///< Data page request reached the destination.
     ANT_ENV_PAGE_REQUEST_FAILED,                    ///< Data page request did not reach the destination.
 } ant_env_evt_t;
@@ -170,6 +180,12 @@ struct ant_env_profile_s
     ant_env_page1_data_t  page_1;         ///< Page 1.
     ant_common_page80_data_t    page_80;  ///< Page 80.
     ant_common_page81_data_t    page_81;  ///< Page 81.
+    ant_common_page82_data_t    page_82;  ///< Page 81.
+    ant_common_page84_data_t    page_84;  ///< Page 81.
+
+    // For RX Messages
+    ant_common_page70_data_t    page_70;
+    ant_common_page73_data_t    page_73;
 };
 
 

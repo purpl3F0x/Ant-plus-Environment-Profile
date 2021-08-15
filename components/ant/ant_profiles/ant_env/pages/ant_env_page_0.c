@@ -48,6 +48,16 @@ static void page0_data_log(ant_env_page0_data_t const * p_page_data)
     //NRF_LOG_INFO("Transmission Info:                %u", (unsigned int)p_page_data->transmission_info);
 
     //NRF_LOG_INFO("Supported Pages:                %u", (unsigned int)p_page_data->supported_pages);
+    if (p_page_data->default_trans_rate == 0 )
+    {
+      NRF_LOG_INFO("Default Transmition Rate:      0.5Hz");
+    }
+    else if (p_page_data->default_trans_rate == 1)
+    {
+      NRF_LOG_INFO("Default Transmition Rate:        4Hz");
+    }
+
+    NRF_LOG_INFO("\n\r");
 }
 
 
@@ -58,13 +68,13 @@ void ant_env_page_0_encode(uint8_t                    * p_page_buffer,
 
     p_outcoming_data->reserved[0]           = UINT8_MAX;
     p_outcoming_data->reserved[1]           = UINT8_MAX;
-    p_outcoming_data->transmission_info     = (p_page_data->local_time << 1u) && (p_page_data->utc_time << 2u) && (p_page_data->default_trans_rate);
+    p_outcoming_data->transmission_info     = (p_page_data->local_time << 4u) || (p_page_data->utc_time << 2u) || (p_page_data->default_trans_rate);
     p_outcoming_data->supported_pages_bit0  = (uint8_t)0b11u;
     p_outcoming_data->supported_pages_bit1  = (uint8_t)0u;
     p_outcoming_data->supported_pages_bit2  = (uint8_t)0u;
     p_outcoming_data->supported_pages_bit3  = (uint8_t)0u;
 
-    //page0_data_log(p_page_data);
+    page0_data_log(p_page_data);
 }
 
 

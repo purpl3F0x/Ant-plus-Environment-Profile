@@ -205,12 +205,15 @@ static void profile_setup(void)
     
 
     m_ant_env.page_0.supported_pages = 0b0011;
+    m_ant_env.page_0.default_trans_rate = ANT_ENV_PAGE_0_TRANS_RATE_4_HZ;
     m_ant_env.page_80.manufacturer_id = ENV_MFG_ID;
     m_ant_env.page_81.serial_number = ENV_SERIAL_NUMBER;
     m_ant_env.page_80.hw_revision = ENV_HW_VERSION;
     m_ant_env.page_81.sw_revision_major = ENV_SW_VERSION;
     m_ant_env.page_81.sw_revision_major = 0xFF;
     m_ant_env.page_80.model_number = ENV_MODEL_NUMBER;
+    m_ant_env.page_82.descriptive_bit_field.battery_status = COMMON_PAGE_82_BAT_STATUS_NEW;
+    m_ant_env.page_82.descriptive_bit_field.coarse_bat_volt = 1;
 
 
     err_code = ant_env_sens_open(&m_ant_env);

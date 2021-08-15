@@ -52,15 +52,23 @@ typedef struct
  * @retval     NRF_SUCCESS      If initialization was successful. Otherwise, an error code is returned.
  */
 static ret_code_t ant_env_init(ant_env_profile_t          * p_profile,
-                             ant_channel_config_t const * p_channel_config)
+                               ant_channel_config_t const * p_channel_config,
+                               ant_env_sens_config_t const * p_sens_config)
 {
     p_profile->channel_number = p_channel_config->channel_number;
 
     p_profile->page_0 = DEFAULT_ANT_ENV_PAGE0();
     p_profile->page_1 = DEFAULT_ANT_ENV_PAGE1();
+    p_profile->page_80 = DEFAULT_ANT_COMMON_page80();
+    p_profile->page_81 = DEFAULT_ANT_COMMON_page81();
+    p_profile->page_82 = DEFAULT_ANT_COMMON_page82();
+    p_profile->page_84 = DEFAULT_ANT_COMMON_page84();
 
-    // p_profile->page_80 = DEFAULT_ANT_COMMON_page80();
-    // p_profile->page_81 = DEFAULT_ANT_COMMON_page81();
+    //p_profile->page_70 = DEFAULT_ANT_COMMON_PAGE70();
+
+    p_profile->evt_handler    = p_sens_config->evt_handler;
+    p_profile->_cb.p_sens_cb = p_sens_config->p_cb;
+    ant_request_controller_init(&(p_profile->_cb.p_sens_cb->req_controller));
 
     NRF_LOG_INFO("ANT ENV channel %u init", p_profile->channel_number);
     return ant_channel_init(p_channel_config);
@@ -101,7 +109,7 @@ ret_code_t ant_env_sens_init(ant_env_profile_t           * p_profile,
     p_env_cb->ext_page_number    = ANT_ENV_PAGE_80;
     p_env_cb->message_counter    = 0;
 
-    return ant_env_init(p_profile, p_channel_config);
+    return ant_env_init(p_profile, p_channel_config, p_sens_config);
 }
 
 
@@ -116,17 +124,26 @@ static ant_env_page_t next_page_number_get(ant_env_profile_t * p_profile)
     ant_env_sens_cb_t * p_env_cb = p_profile->_cb.p_sens_cb;
     ant_env_page_t      page_number;
 
-    if (p_env_cb->message_counter == (BACKGROUND_DATA_INTERVAL))
+    if (ant_request_controller_pending_get(&(p_env_cb->req_controller), (uint8_t *)&page_number))
+    {
+        // No implementation needed
+    }
+    else if (p_env_cb->message_counter == (BACKGROUND_DATA_INTERVAL))
     {
         page_number = p_env_cb->ext_page_number++;
         p_env_cb->message_counter = 0;
         //p_env_cb->message_counter = p_env_cb->ext_page_number++;
 
-        if (p_env_cb->ext_page_number > ANT_ENV_PAGE_81) 
+        if (p_env_cb->ext_page_number > ANT_ENV_PAGE_82) 
           p_env_cb->ext_page_number = ANT_ENV_PAGE_80;
     }
     else {
-      page_number = p_env_cb->message_counter & 1u;
+      switch (p_env_cb->message_counter % 3){
+        case 0: page_number = ANT_ENV_PAGE_0; break;
+        case 1: page_number = ANT_ENV_PAGE_1; break;
+        case 2: page_number = ANT_ENV_PAGE_84; break;
+      }
+      //page_number = p_env_cb->message_counter & 1u;
       p_env_cb->message_counter++;
     }
 
@@ -166,6 +183,14 @@ static void sens_message_encode(ant_env_profile_t * p_profile, uint8_t * p_messa
 
         case ANT_ENV_PAGE_81:
             ant_common_page_81_encode(p_env_message_payload->page_payload, &(p_profile->page_81));
+            break;
+
+        case ANT_ENV_PAGE_82:
+            ant_common_page_82_encode(p_env_message_payload->page_payload, &(p_profile->page_82));
+            break;
+        
+        case ANT_ENV_PAGE_84:
+            ant_common_page_84_encode(p_env_message_payload->page_payload, &(p_profile->page_84));
             break;
 
         default:
@@ -214,8 +239,6 @@ void ant_env_sens_evt_handler(ant_evt_t * p_ant_evt, void * p_context)
             case EVENT_TX:
             case EVENT_TRANSFER_TX_FAILED:
             case EVENT_TRANSFER_TX_COMPLETED:
-                // ant_message_send(p_profile);
-
 
                 sens_message_encode(p_profile, p_message_payload);
                 if (ant_request_controller_ack_needed(&(p_env_cb->req_controller)))
@@ -234,12 +257,27 @@ void ant_env_sens_evt_handler(ant_evt_t * p_ant_evt, void * p_context)
 
                 break;
             
-             //case EVENT_RX:
-             //    if (p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_ACKNOWLEDGED_DATA_ID)
-             //    {
-             //        sens_message_decode(p_profile, p_ant_evt->message.ANT_MESSAGE_aucPayload);
-             //    }
-             //    break;
+             case EVENT_RX:
+                 if (p_ant_evt->message.ANT_MESSAGE_ucMesgID == MESG_ACKNOWLEDGED_DATA_ID)
+                 {
+                     switch (p_ant_evt->message.ANT_MESSAGE_aucPayload[0])
+                     {
+                        // ANT_MESSAGE_aucPayload[1] to ignore the incoming page number
+                        case (ANT_ENV_PAGE_70):
+                            ant_common_page_70_decode(&p_ant_evt->message.ANT_MESSAGE_aucPayload[1], &p_profile->page_70);
+                            p_profile->evt_handler(p_profile, ANT_ENV_PAGE_70_REQUESTED);
+                            break;
+
+                        case (ANT_ENV_PAGE_73):
+                            ant_common_page_73_decode(&p_ant_evt->message.ANT_MESSAGE_aucPayload[1], &p_profile->page_73);
+                            p_profile->evt_handler(p_profile, ANT_ENV_PAGE_73_REQUESTED);
+                            break;
+                         
+                         default:
+                            break; 
+                     }
+                 }
+                 break;
 
             default:
                 break;

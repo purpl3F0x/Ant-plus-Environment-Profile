@@ -15,8 +15,12 @@
 #include "ant_env_page_0.h"
 #include "ant_env_page_1.h"
 #include "ant_common_page_70.h"
+#include "ant_common_page_73.h"
 #include "ant_common_page_80.h"
 #include "ant_common_page_81.h"
+#include "ant_common_page_82.h"
+#include "ant_common_page_84.h"
+
 
 #ifdef __cplusplus
 extern "C" {

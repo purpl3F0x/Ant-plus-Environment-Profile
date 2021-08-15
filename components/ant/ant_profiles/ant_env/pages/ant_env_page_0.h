@@ -22,6 +22,18 @@
 extern "C" {
 #endif
 
+/**@brief Common Page 0 Default Transmission Rate/
+ *
+ * This enum represents possible default transmission rate values for the common page 82.
+ */
+typedef enum
+{
+    ANT_ENV_PAGE_0_TRANS_RATE_0_5_HZ    = 0b00,    ///< default transmission rate of 0.5 Hz.
+    ANT_ENV_PAGE_0_TRANS_RATE_4_HZ      = 0b01,    ///< default transmission rate of 4 Hz.
+    ANT_ENV_PAGE_0_TRANS_RATE_RESERVED0 = 0b10,    ///< Reserved.
+    ANT_ENV_PAGE_0_TRANS_RATE_RESERVED1 = 0b11,    ///< Reserved.
+} ant_env_page0_default_trans_rate_t;
+
 /**@brief Data structure for ENV data page 0.
  *
  * This structure is used as a common page.
@@ -43,7 +55,7 @@ typedef struct
         .supported_pages  = 0b11, \
         .local_time = 0,          \
         .utc_time = 0,            \
-        .default_trans_rate = 1   \
+        .default_trans_rate = ANT_ENV_PAGE_0_TRANS_RATE_4_HZ\
     }
 
 /**@brief Function for encoding page 0.
