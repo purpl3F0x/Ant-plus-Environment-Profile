@@ -143,18 +143,19 @@ void ant_common_page_84_encode(uint8_t                                 * p_page_
 }
 
 
-//void ant_common_page_84_decode(uint8_t const                     * p_page_buffer,
-//                               volatile ant_common_page84_data_t * p_page_data)
-//{
-//    ant_common_page84_data_layout_t const * p_incoming_data =
-//        (ant_common_page84_data_layout_t *)p_page_buffer;
+void ant_common_page_84_decode(uint8_t const                     * p_page_buffer,
+                               volatile ant_common_page84_data_t * p_page_data)
+{
+    ant_common_page84_data_layout_t const * p_incoming_data =
+        (ant_common_page84_data_layout_t *)p_page_buffer;
+  
+    p_page_data->subpage_1 = p_incoming_data->subpage_1;
+    p_page_data->subpage_2 = p_incoming_data->subpage_2;
 
-//    p_page_data->hw_revision = p_incoming_data->hw_revision;
+    p_page_data->data_field_1 = uint16_big_decode(p_incoming_data->data_field_1);
+    p_page_data->data_field_2 = uint16_big_decode(p_incoming_data->data_field_2);
 
-//    p_page_data->manufacturer_id = uint16_decode(p_incoming_data->manufacturer_id);
-//    p_page_data->model_number    = uint16_decode(p_incoming_data->model_number);
-
-//    page84_data_log(p_page_data);
-//}
+    page84_data_log(p_page_data);
+}
 
 #endif // NRF_MODULE_ENABLED(ANT_COMMON_PAGE_84)
