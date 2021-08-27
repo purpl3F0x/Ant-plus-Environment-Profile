@@ -25,8 +25,8 @@ extern "C" {
 typedef struct
 {
     uint8_t  event_count;           ///< event count - increments with each measurement.
-    int16_t _24_hour_low:  12;      ///< Signed Integer representing the lowest temperature recorded over the last 24hours (0x800 invalid)
-    int16_t _24_hour_high: 12;      ///< Signed Integer representing the highest temperature recorded over the last 24hours (0x800 invalid)
+    int16_t _24_hour_low;           ///< Signed Integer representing the lowest temperature recorded over the last 24hours (0x800 invalid)
+    int16_t _24_hour_high;          ///< Signed Integer representing the highest temperature recorded over the last 24hours (0x800 invalid)
     int16_t current_temp;           ///< Signed Integer representing the current Temperature (0x8000 invalid)
 
 } ant_env_page1_data_t;
