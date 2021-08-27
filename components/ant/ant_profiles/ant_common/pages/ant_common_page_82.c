@@ -115,17 +115,18 @@ void ant_common_page_82_encode(uint8_t                                 * p_page_
 }
 
 
-// void ant_common_page_82_decode(uint8_t const                     * p_page_buffer,
-//                                volatile ant_common_page82_data_t * p_page_data)
-// {
-//     ant_common_page82_data_layout_t const * p_incoming_data =
-//         (ant_common_page82_data_layout_t *)p_page_buffer;
+ void ant_common_page_82_decode(uint8_t const                     * p_page_buffer,
+                                volatile ant_common_page82_data_t * p_page_data)
+ {
+     ant_common_page82_data_layout_t const * p_incoming_data =
+         (ant_common_page82_data_layout_t *)p_page_buffer;
 
-//     p_page_data->battery_identifier = *(void*)&p_incoming_data->battery_identifier;
+     *(uint8_t*)&p_page_data->battery_identifier = p_incoming_data->battery_identifier;
+     p_page_data->cumul_operating_time = uint24_decode(p_incoming_data->cumulative_operating_time);
+     p_page_data->fract_bat_volt = p_incoming_data->fractional_battery_voltage;
+     *(uint8_t*)&p_page_data->descriptive_bit_field = p_incoming_data->battery_identifier;
 
-
-
-//     page82_data_log(p_page_data);
-// }
+     page82_data_log(p_page_data);
+ }
 
 #endif // NRF_MODULE_ENABLED(ANT_COMMON_PAGE_82)
