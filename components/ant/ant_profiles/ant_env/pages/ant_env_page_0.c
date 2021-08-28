@@ -45,17 +45,47 @@ typedef struct
  */
 static void page0_data_log(ant_env_page0_data_t const * p_page_data)
 {
-    //NRF_LOG_INFO("Transmission Info:                %u", (unsigned int)p_page_data->transmission_info);
 
-    //NRF_LOG_INFO("Supported Pages:                %u", (unsigned int)p_page_data->supported_pages);
-    if (p_page_data->default_trans_rate == 0 )
+    NRF_LOG_INFO("Supported Pages:                %d", (unsigned int)p_page_data->supported_pages);
+    if (p_page_data->transmission_info.default_trans_rate == 0 )
     {
       NRF_LOG_INFO("Default Transmition Rate:      0.5Hz");
     }
-    else if (p_page_data->default_trans_rate == 1)
+    else if (p_page_data->transmission_info.default_trans_rate == 1)
     {
       NRF_LOG_INFO("Default Transmition Rate:        4Hz");
     }
+
+    switch (p_page_data->transmission_info.local_time) 
+    {
+        case ANT_ENV_PAGE_0_TIME_NOT_SUPPORTED:
+            NRF_LOG_INFO("Local Time:   Not Supported");
+            break;
+        case ANT_ENV_PAGE_0_TIME_SUPPORTED_NOT_SET:
+            NRF_LOG_INFO("Local Time:   Supported not set");
+            break;
+        case ANT_ENV_PAGE_0_TIME_SUPPORTED_N_SET:
+            NRF_LOG_INFO("Local Time:   Set");
+            break;
+        default:
+          break;
+    }
+
+    switch (p_page_data->transmission_info.utc_time) 
+    {
+        case ANT_ENV_PAGE_0_TIME_NOT_SUPPORTED:
+            NRF_LOG_INFO("UTC Time:   Not Supported");
+            break;
+        case ANT_ENV_PAGE_0_TIME_SUPPORTED_NOT_SET:
+            NRF_LOG_INFO("UTC Time:   Supported not set");
+            break;
+        case ANT_ENV_PAGE_0_TIME_SUPPORTED_N_SET:
+            NRF_LOG_INFO("UTC Time:   Set");
+            break;
+        default:
+          break;
+    }
+
 
     NRF_LOG_INFO("\n\r");
 }
@@ -68,29 +98,29 @@ void ant_env_page_0_encode(uint8_t                    * p_page_buffer,
 
     p_outcoming_data->reserved[0]           = UINT8_MAX;
     p_outcoming_data->reserved[1]           = UINT8_MAX;
-    p_outcoming_data->transmission_info     = (p_page_data->local_time << 4u) || (p_page_data->utc_time << 2u) || (p_page_data->default_trans_rate);
-    p_outcoming_data->supported_pages_bit0  = (uint8_t)0b11u;
-    p_outcoming_data->supported_pages_bit1  = (uint8_t)0u;
-    p_outcoming_data->supported_pages_bit2  = (uint8_t)0u;
-    p_outcoming_data->supported_pages_bit3  = (uint8_t)0u;
+    p_outcoming_data->transmission_info     = *(uint8_t*)&p_page_data->transmission_info;
+    p_outcoming_data->supported_pages_bit0  = (uint8_t)(p_page_data->supported_pages);
+    p_outcoming_data->supported_pages_bit1  = (uint8_t)(p_page_data->supported_pages >> 8u);
+    p_outcoming_data->supported_pages_bit2  = (uint8_t)(p_page_data->supported_pages >> 16u);
+    p_outcoming_data->supported_pages_bit3  = (uint8_t)(p_page_data->supported_pages >> 24u);
 
     page0_data_log(p_page_data);
 }
 
 
-// void ant_env_page_0_decode(uint8_t const        * p_page_buffer,
-//                            ant_env_page0_data_t * p_page_data)
-// {
-//     ant_env_page0_data_layout_t const * p_incoming_data = (ant_env_page0_data_layout_t *)p_page_buffer;
+ void ant_env_page_0_decode(uint8_t const        * p_page_buffer,
+                            ant_env_page0_data_t * p_page_data)
+ {
+     ant_env_page0_data_layout_t const * p_incoming_data = (ant_env_page0_data_layout_t *)p_page_buffer;
 
-//     p_page_data->transmission_info  = (uint32_t)p_incoming_data->transmission_info;
+     *(uint8_t*)&p_page_data->transmission_info = p_incoming_data->transmission_info;
 
-//     p_page_data->supported_pages    = (uint32_t)(p_incoming_data->supported_pages_bit0 +
-//                                       (p_incoming_data->supported_pages_bit1 << 8) +
-//                                       (p_incoming_data->supported_pages_bit2 << 16) + 
-//                                       (p_incoming_data->supported_pages_bit3 << 24));
+     p_page_data->supported_pages    = ((uint32_t)p_incoming_data->supported_pages_bit0 |
+                                       ((uint32_t)p_incoming_data->supported_pages_bit1 << 8u) |
+                                       ((uint32_t)p_incoming_data->supported_pages_bit2 << 16u) | 
+                                       ((uint32_t)p_incoming_data->supported_pages_bit3 << 24u));
 
-//     page0_data_log(p_page_data);
-// }
+     page0_data_log(p_page_data);
+ }
 
 #endif // NRF_MODULE_ENABLED(ANT_ENV)
