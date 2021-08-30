@@ -38,8 +38,8 @@ typedef struct
     (ant_env_page1_data_t)        \
     {                             \
         .event_count   = 0,       \
-        ._24_hour_low  = 0,       \
-        ._24_hour_high = 0,       \
+        ._24_hour_low  = 0x800u,       \
+        ._24_hour_high = 0x800u,       \
         .current_temp  = 0        \
     }
 
